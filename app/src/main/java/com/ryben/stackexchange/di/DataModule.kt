@@ -1,30 +1,20 @@
 package com.ryben.stackexchange.di
 
-import com.ryben.stackexchange.core.AppConfig
-import com.ryben.stackexchange.data.ApiService
+import com.ryben.stackexchange.data.UserRepositoryImpl
+import com.ryben.stackexchange.domain.UserRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DataModule {
-    companion object {
-        @Provides
-        @Singleton
-        fun provideApiService(): ApiService {
-            val retrofit = Retrofit.Builder()
-                .baseUrl(AppConfig.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+interface DataModule {
+    @Binds
+    @Singleton
+     fun bindUserRepository(userRepository: UserRepositoryImpl): UserRepository
 
-            return retrofit.create(ApiService::class.java)
-        }
-    }
 
 }

@@ -14,6 +14,7 @@ hilt = "2.57.1"
 hilt-navigation-compose = "1.0.0"
 retrofit = "3.0.0"
 gson = "2.13.2"
+timber = "5.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,6 +38,7 @@ hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-com
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit"}
 retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit"}
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson"}
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber"}
 
 
 [plugins]

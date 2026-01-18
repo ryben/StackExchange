@@ -6,11 +6,11 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("users")
-    fun getUsers(
+    suspend fun getUsers(
         @Query("inname") name: String,
-        @Query("pagesize") pageSize: String,
+        @Query("pagesize") pageSize: Int,
         @Query("order") order: String,
         @Query("sort") sort: String,
         @Query("site") site: String,
-    ): Result<UserResponseDto>
+    ): UserResponseDto
 }

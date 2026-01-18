@@ -10,11 +10,11 @@ data class UserDto(
     val name: String,
 
     @SerializedName("location")
-    val location: String,
+    val location: String?,
 
     @SerializedName("reputation")
-    val reputation: String,
+    val reputation: String?,
 
     @SerializedName("creation_date")
-    val dateCreated: String,
+    val dateCreated: String?,
 )

@@ -69,8 +69,11 @@ fun SearchScreen(
         ) {
             // Search bar
             Row(modifier = Modifier.fillMaxWidth()) {
-                // TODO: Make single line input
-                TextField(value = searchText, onValueChange = { onSearchTextChanged(it) })
+                TextField(
+                    value = searchText,
+                    onValueChange = { onSearchTextChanged(it) },
+                    singleLine = true,
+                )
                 Button(onClick = { onSearch(searchText) }) {
                     Text("Search")
                 }

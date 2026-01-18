@@ -30,14 +30,12 @@ class SearchViewModel @Inject constructor(private val userRepository: UserReposi
     }
 
     fun onSearch(searchText: String) {
-        // TODO: Specify dispatcher/context
         viewModelScope.launch {
             userRepository.searchUserByName(searchText)
                 .onSuccess { result ->
                     _uiState.update { it.copy(searchResults = result) }
                 }
                 .onFailure {
-                    Timber.e("Error on search: $searchText")
                     // TODO: Show error in UI
                 }
         }

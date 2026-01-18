@@ -7,6 +7,7 @@ import com.ryben.stackexchange.domain.model.User
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
@@ -24,10 +25,12 @@ class UserRepositoryImpl @Inject constructor(
                     site = SITE_STACKOVERFLOW,
                 )
 
+                Timber.d("Search success: name:%s count=%s", name, dto.items.count())
                 Result.success(dto.items.map { it.toDomain() })
             } catch (e: CancellationException) {
                 throw e // Let the parent scope handle it the cancellation i.e.
             } catch (e: Exception) {
+                Timber.e("Error on search: $name")
                 Result.failure(e)
             }
         }

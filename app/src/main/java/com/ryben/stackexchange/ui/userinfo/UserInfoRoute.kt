@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -84,7 +85,7 @@ fun UserInfoScreen(
         ) {
 
             IconButton(onClick = onBack) {
-                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "")
+                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
             }
 
             Column(
@@ -94,20 +95,31 @@ fun UserInfoScreen(
             ) {
                 user?.let {
                     // Profile Image
-                    GlideImage(
-                        model = user.profileImageUrl,
-                        contentDescription = "",
-                        modifier = Modifier
-                            .size(120.dp)
-                            .shadow(
-                                elevation = 24.dp,
-                                shape = CircleShape,
-                                clip = false
-                            )
-                            .clip(CircleShape),
-                    ) { requestBuilder ->
-                        requestBuilder.placeholder(R.drawable.default_user_icon)
+                    if (LocalInspectionMode.current) {
+                        Image(
+                            painter = painterResource(R.drawable.default_user_icon),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(120.dp)
+                                .clip(CircleShape)
+                        )
+                    } else {
+                        GlideImage(
+                            model = user.profileImageUrl,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(120.dp)
+                                .shadow(
+                                    elevation = 24.dp,
+                                    shape = CircleShape,
+                                    clip = false
+                                )
+                                .clip(CircleShape),
+                        ) { requestBuilder ->
+                            requestBuilder.placeholder(R.drawable.default_user_icon)
+                        }
                     }
+
 
                     // Name
                     Text(
@@ -149,7 +161,7 @@ fun UserInfoScreen(
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.diamond),
-                                contentDescription = "",
+                                contentDescription = null,
                                 colorFilter = ColorFilter.tint(CustomColor.Orange),
                                 modifier = Modifier
                                     .size(36.dp)
@@ -191,7 +203,7 @@ fun UserInfoScreen(
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.calendar),
-                                contentDescription = "",
+                                contentDescription = null,
                                 colorFilter = ColorFilter.tint(Color.Gray),
                                 modifier = Modifier
                                     .size(36.dp)

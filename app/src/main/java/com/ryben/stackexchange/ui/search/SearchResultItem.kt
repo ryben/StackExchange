@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -64,15 +65,24 @@ fun SearchResultItem(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
 
     ) {
-
-        GlideImage(
-            model = profileImageUrl,
-            contentDescription = "",
-            modifier = Modifier
-                .size(50.dp)
-                .clip(CircleShape),
-        ) { requestBuilder ->
-            requestBuilder.placeholder(R.drawable.default_user_icon)
+        if (LocalInspectionMode.current) {
+            Image(
+                painter = painterResource(R.drawable.default_user_icon),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(50.dp)
+                    .clip(CircleShape)
+            )
+        } else {
+            GlideImage(
+                model = profileImageUrl,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(50.dp)
+                    .clip(CircleShape),
+            ) { requestBuilder ->
+                requestBuilder.placeholder(R.drawable.default_user_icon)
+            }
         }
 
         Column(

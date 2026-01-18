@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -22,8 +23,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -79,7 +82,6 @@ fun SearchScreen(
     onSearchTextChanged: (newSearchText: String) -> Unit,
     onSearch: (searchText: String) -> Unit,
     onSelectUser: (user: User) -> Unit,
-    modifier: Modifier = Modifier
 ) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
@@ -105,7 +107,7 @@ fun SearchScreen(
                 IconButton(onClick = { onSearch(uiState.searchText) }) {
                     Image(
                         painter = painterResource(id = R.drawable.outline_search_24),
-                        contentDescription = "",
+                        contentDescription = null,
                     )
                 }
             }
@@ -122,13 +124,29 @@ fun SearchScreen(
                 modifier = Modifier
                     .padding(top = 16.dp)
                     .fillMaxWidth()
-                    .defaultMinSize(minHeight = 100.dp),
+                    .defaultMinSize(minHeight = 120.dp),
                 contentAlignment = Alignment.Center
             ) {
                 when (uiState.status) {
 
                     SearchStatus.IDLE -> {
-                        Text(text = "RESULTS SHOW HERE", color = Color.Gray)
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(R.drawable.outline_list_24),
+                                contentDescription = null,
+                                colorFilter = ColorFilter.tint(color = Color.Gray),
+                                modifier = Modifier.size(40.dp)
+                            )
+                            Text(
+                                text = "RESULTS SHOW HERE",
+                                color = Color.Gray,
+                                textAlign = TextAlign.Center,
+                                fontSize = 16.sp,
+                            )
+                        }
                     }
 
                     SearchStatus.LOADING -> {
@@ -157,13 +175,44 @@ fun SearchScreen(
                                 }
                             }
                         } else {
-                            Text(text = "NO MATCHES", color = Color.Gray)
-
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(R.drawable.outline_list_24),
+                                    contentDescription = null,
+                                    colorFilter = ColorFilter.tint(color = Color.Gray),
+                                    modifier = Modifier.size(40.dp)
+                                )
+                                Text(
+                                    text = "NO MATCHES",
+                                    color = Color.Gray,
+                                    textAlign = TextAlign.Center,
+                                    fontSize = 16.sp,
+                                )
+                            }
                         }
                     }
 
                     SearchStatus.ERROR -> {
-                        // TODO: Show error message
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(R.drawable.outline_error_24),
+                                contentDescription = null,
+                                colorFilter = ColorFilter.tint(color = Color.Gray),
+                                modifier = Modifier.size(40.dp)
+                            )
+                            Text(
+                                text = "An error occurred.\nPlease try again later.",
+                                color = Color.Gray,
+                                textAlign = TextAlign.Center,
+                                fontSize = 16.sp,
+                            )
+                        }
                     }
                 }
 

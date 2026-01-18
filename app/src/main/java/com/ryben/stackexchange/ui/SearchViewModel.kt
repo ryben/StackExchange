@@ -54,7 +54,6 @@ class SearchViewModel @Inject constructor(private val userRepository: UserReposi
                 }
                 .onFailure {
                     _searchUiState.update { it.copy(status = SearchStatus.ERROR) }
-                    // TODO: Show error in UI
                 }
         }
     }

@@ -45,9 +45,9 @@ fun SearchScreenPreview() {
     val uiState = SearchUiState(
         searchText = "",
         searchResults = listOf(
-            User(0, "Michael Scott", "Scranton", "5", "Jan 1, 2010"),
-            User(1, "Jim Halpert", "Scranton", "10", "Feb 2, 2011"),
-            User(2, "Dwight Schrute", "Scranton", "900", "Mar 2, 2012"),
+            User(0, "Michael Scott", "Scranton", 5, "Jan 1, 2010"),
+            User(1, "Jim Halpert", "Scranton", 10, "Feb 2, 2011"),
+            User(2, "Dwight Schrute", "Scranton", 900, "Mar 2, 2012"),
         ),
         status = SearchStatus.SUCCESS
     )
@@ -169,7 +169,7 @@ fun SearchScreen(
                                     SearchResultItem(
                                         name = item.name,
                                         location = item.location,
-                                        reputation = item.reputation,
+                                        reputation = item.reputation.toString(),
                                         profileImageUrl = item.profileImageUrl,
                                         onClick = { onSelectUser(item) }
                                     )

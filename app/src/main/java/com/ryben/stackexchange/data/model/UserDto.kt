@@ -13,7 +13,7 @@ data class UserDto(
     val location: String?,
 
     @SerializedName("reputation")
-    val reputation: String?,
+    val reputation: Long?,
 
     @SerializedName("creation_date")
     val dateCreated: Long?,

@@ -16,7 +16,7 @@ class UserMapperTest {
             id = 10,
             name = "Rey Benedicto",
             location = "Cavite",
-            reputation = "20",
+            reputation = 20,
             dateCreated = 1453075200,
             profileImageUrl = ""
         )
@@ -25,7 +25,7 @@ class UserMapperTest {
             id = 10,
             name = "Rey Benedicto",
             location = "Cavite",
-            reputation = "20",
+            reputation = 20,
             dateCreated = "Jan 18, 2016"
         )
 

@@ -54,7 +54,7 @@ fun UserInfoRoutePreview() {
             id = 100,
             name = "Rey Benedicto",
             location = "Cavite",
-            reputation = "500",
+            reputation = 500,
             dateCreated = "Jul 1, 2022",
             profileImageUrl = "",
         ),
@@ -173,7 +173,7 @@ fun UserInfoScreen(
                                     .padding(top = 4.dp)
                             )
                             Text(
-                                text = it.reputation,
+                                text = it.reputation.toString(),
                                 fontSize = 32.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(top = 4.dp)

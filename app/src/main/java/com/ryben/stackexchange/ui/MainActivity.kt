@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -28,12 +30,20 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             StackExchangeTheme(darkTheme = false) {
                 NavHost(navController = navController, startDestination = Search) {
-                    composable<Search> {
-                        SearchRoute(navToUserInfoRoute = { navController.navigate(UserInfo) })
+                    composable<Search> { backStackEntry ->
+                        SearchRoute(
+                            navToUserInfoRoute = { navController.navigate(UserInfo) },
+                            hiltViewModel(remember(backStackEntry) { // scope parent to navhost
+                                navController.getBackStackEntry<Search>()
+                            })
+                        )
                     }
-                    composable<UserInfo> {
+                    composable<UserInfo> { backStackEntry ->
                         UserInfoRoute(
                             onBack = { navController.navigateUp() },
+                            hiltViewModel(remember(backStackEntry) {  // scope parent to navhost
+                                navController.getBackStackEntry<Search>()
+                            })
                         )
                     }
                 }

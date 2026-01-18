@@ -17,6 +17,7 @@ data class SearchUiState(
     val searchText: String = "",
     val searchResults: List<User> = emptyList(),
     val status: SearchStatus = SearchStatus.IDLE,
+    val selectedUser: User? = null,
 )
 
 enum class SearchStatus {
@@ -56,6 +57,10 @@ class SearchViewModel @Inject constructor(private val userRepository: UserReposi
                     // TODO: Show error in UI
                 }
         }
+    }
+
+    fun selectUser(user: User) {
+        _searchUiState.update { it.copy(selectedUser = user) }
     }
 
 }

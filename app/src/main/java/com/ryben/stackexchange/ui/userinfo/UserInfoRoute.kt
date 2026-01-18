@@ -13,12 +13,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ryben.stackexchange.domain.model.User
+import com.ryben.stackexchange.ui.search.SearchViewModel
 
 
 @Preview
@@ -37,22 +40,18 @@ fun UserInfoRoutePreview() {
 }
 
 @Composable
-fun UserInfoRoute(onBack: () -> Unit) {
+fun UserInfoRoute(onBack: () -> Unit, viewModel: SearchViewModel) {
+    val uiState by viewModel.searchUiState.collectAsStateWithLifecycle()
+
     UserInfoScreen(
-        user = User(
-            id = 100,
-            name = "Rey Benedicto",
-            location = "Cavite",
-            reputation = "500",
-            dateCreated = "20260118"
-        ),
+        user = uiState.selectedUser,
         onBack = onBack
     )
 }
 
 @Composable
 fun UserInfoScreen(
-    user: User,
+    user: User?,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -72,14 +71,17 @@ fun UserInfoScreen(
                 Image(
                     painter = painterResource(id = com.ryben.stackexchange.R.drawable.default_user_icon),
                     contentDescription = "",
-                    modifier = Modifier.size(100.dp)
+                    modifier = Modifier.size(120.dp)
                 )
 
-                Text(text = user.name)
-                Text(text = user.location)
-                Text(text = user.reputation)
-                Text(text = "Badges")
-                Text(text = user.dateCreated)
+                user?.let {
+                    Text(text = it.name)
+                    Text(text = it.location)
+                    Text(text = it.reputation)
+                    Text(text = "Badges")
+                    Text(text = it.dateCreated)
+                }
+
             }
         }
 

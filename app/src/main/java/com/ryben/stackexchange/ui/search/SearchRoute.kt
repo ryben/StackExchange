@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ryben.stackexchange.R
 import com.ryben.stackexchange.domain.model.User
@@ -56,14 +55,17 @@ fun SearchScreenPreview() {
 
 
 @Composable
-fun SearchRoute(navToUserInfoRoute: () -> Unit, viewModel: SearchViewModel = hiltViewModel()) {
+fun SearchRoute(navToUserInfoRoute: () -> Unit, viewModel: SearchViewModel) {
     val uiState by viewModel.searchUiState.collectAsStateWithLifecycle()
 
     SearchScreen(
         uiState = uiState,
         onSearchTextChanged = viewModel::onSearchTextUpdated,
         onSearch = viewModel::onSearch,
-        onSelectUser = navToUserInfoRoute
+        onSelectUser = { user ->
+            viewModel.selectUser(user)
+            navToUserInfoRoute()
+        }
     )
 }
 
@@ -73,7 +75,7 @@ fun SearchScreen(
     uiState: SearchUiState,
     onSearchTextChanged: (newSearchText: String) -> Unit,
     onSearch: (searchText: String) -> Unit,
-    onSelectUser: () -> Unit,
+    onSelectUser: (user: User) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -146,7 +148,7 @@ fun SearchScreen(
                                         name = item.name,
                                         location = item.location,
                                         reputation = item.reputation,
-                                        onClick = onSelectUser
+                                        onClick = { onSelectUser(item) }
                                     )
                                 }
                             }

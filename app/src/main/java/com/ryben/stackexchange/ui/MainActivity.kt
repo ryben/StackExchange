@@ -1,4 +1,4 @@
-package com.ryben.stackexchange
+package com.ryben.stackexchange.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            StackExchangeTheme {
+            StackExchangeTheme(darkTheme = false) {
                 SearchRoute()
             }
         }

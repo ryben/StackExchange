@@ -19,6 +19,7 @@ mockitoVersion = "5.21.0"
 mockitoKotlinVersion = "6.2.1"
 mockkVersion = "1.14.7"
 coroutines = "1.10.2"
+glide = "1.0.0-beta01"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -47,6 +48,7 @@ mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mo
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlinVersion" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+glide = { group = "com.github.bumptech.glide", name = "compose", version.ref = "glide" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

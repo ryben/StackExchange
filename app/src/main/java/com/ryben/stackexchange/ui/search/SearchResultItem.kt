@@ -8,18 +8,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.ryben.stackexchange.R
 import com.ryben.stackexchange.ui.theme.CustomColor
 
@@ -30,17 +34,17 @@ fun SearchResultItemPreview() {
         "Rey Benedicto",
         "Cavite",
         "100",
-        imageResourceId = R.drawable.default_user_icon,
         onClick = {},
     )
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun SearchResultItem(
     name: String,
     location: String,
     reputation: String,
-    imageResourceId: Int = R.drawable.default_user_icon,
+    profileImageUrl: String = "",
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -60,11 +64,16 @@ fun SearchResultItem(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
 
     ) {
-        Image(
-            painter = painterResource(id = imageResourceId),
+
+        GlideImage(
+            model = profileImageUrl,
             contentDescription = "",
-            modifier = Modifier.size(50.dp)
-        )
+            modifier = Modifier
+                .size(50.dp)
+                .clip(CircleShape),
+        ) { requestBuilder ->
+            requestBuilder.placeholder(R.drawable.default_user_icon)
+        }
 
         Column(
             modifier = modifier

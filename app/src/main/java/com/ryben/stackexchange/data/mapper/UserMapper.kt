@@ -11,6 +11,7 @@ fun UserDto.toDomain(): User {
         location = this.location ?: "",
         reputation = this.reputation ?: "",
         dateCreated = this.dateCreated?.toFormattedDate() ?: "",
+        profileImageUrl = this.profileImageUrl ?: "",
     )
 }
 

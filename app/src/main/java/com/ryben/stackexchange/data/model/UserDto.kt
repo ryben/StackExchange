@@ -17,4 +17,10 @@ data class UserDto(
 
     @SerializedName("creation_date")
     val dateCreated: Long?,
+
+    @SerializedName("profile_image")
+    val profileImageUrl: String?,
+
+
+
 )

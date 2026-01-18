@@ -17,7 +17,8 @@ class UserMapperTest {
             name = "Rey Benedicto",
             location = "Cavite",
             reputation = "20",
-            dateCreated = 1453075200
+            dateCreated = 1453075200,
+            profileImageUrl = ""
         )
 
         val expectedUser = User(

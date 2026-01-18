@@ -151,6 +151,7 @@ fun SearchScreen(
                                         name = item.name,
                                         location = item.location,
                                         reputation = item.reputation,
+                                        profileImageUrl = item.profileImageUrl,
                                         onClick = { onSelectUser(item) }
                                     )
                                 }

@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -30,24 +32,36 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             StackExchangeTheme(darkTheme = false) {
                 NavHost(navController = navController, startDestination = Search) {
-                    composable<Search> { backStackEntry ->
-                        SearchRoute(
-                            navToUserInfoRoute = { navController.navigate(UserInfo) },
-                            hiltViewModel(remember(backStackEntry) { // scope parent to navhost
-                                navController.getBackStackEntry<Search>()
-                            })
-                        )
-                    }
-                    composable<UserInfo> { backStackEntry ->
-                        UserInfoRoute(
-                            onBack = { navController.navigateUp() },
-                            hiltViewModel(remember(backStackEntry) {  // scope parent to navhost
-                                navController.getBackStackEntry<Search>()
-                            })
-                        )
-                    }
+                    searchRoute(navController)
+                    userInfoRoute(navController)
                 }
             }
         }
     }
 }
+
+
+fun NavGraphBuilder.searchRoute(navController: NavController) {
+    composable<Search> { backStackEntry ->
+        SearchRoute(
+            navToUserInfoRoute = { navController.navigate(UserInfo) },
+            // Scope parent to navhost to share the viewmodel
+            hiltViewModel(remember(backStackEntry) {
+                navController.getBackStackEntry<Search>()
+            })
+        )
+    }
+}
+
+fun NavGraphBuilder.userInfoRoute(navController: NavController) {
+    composable<UserInfo> { backStackEntry ->
+        UserInfoRoute(
+            onBack = { navController.navigateUp() },
+            // Scope parent to navhost to share the viewmodel
+            hiltViewModel(remember(backStackEntry) {
+                navController.getBackStackEntry<Search>()
+            })
+        )
+    }
+}
+

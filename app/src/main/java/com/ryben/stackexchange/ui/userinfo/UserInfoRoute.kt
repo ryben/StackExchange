@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -22,6 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -31,6 +34,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.ryben.stackexchange.R
 import com.ryben.stackexchange.domain.model.User
 import com.ryben.stackexchange.ui.SearchViewModel
@@ -46,7 +51,8 @@ fun UserInfoRoutePreview() {
             name = "Rey Benedicto",
             location = "Cavite",
             reputation = "500",
-            dateCreated = "Jul 1, 2022"
+            dateCreated = "Jul 1, 2022",
+            profileImageUrl = "",
         ),
         onBack = {}
     )
@@ -62,6 +68,7 @@ fun UserInfoRoute(onBack: () -> Unit, viewModel: SearchViewModel) {
     )
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun UserInfoScreen(
     user: User?,
@@ -85,14 +92,22 @@ fun UserInfoScreen(
                     .fillMaxWidth()
                     .padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
-                Image(
-                    painter = painterResource(id = R.drawable.default_user_icon),
-                    contentDescription = "",
-                    modifier = Modifier.size(120.dp)
-                )
-
                 user?.let {
+                    // Profile Image
+                    GlideImage(
+                        model = user.profileImageUrl,
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(120.dp)
+                            .shadow(
+                                elevation = 24.dp,
+                                shape = CircleShape,
+                                clip = false
+                            )
+                            .clip(CircleShape),
+                    ) { requestBuilder ->
+                        requestBuilder.placeholder(R.drawable.default_user_icon)
+                    }
 
                     // Name
                     Text(
@@ -118,6 +133,7 @@ fun UserInfoScreen(
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
+
                             .fillMaxWidth()
                             .border(
                                 width = 1.dp,

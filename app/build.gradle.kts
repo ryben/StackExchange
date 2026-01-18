@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.retrofit.converter)
     implementation(libs.gson)
     implementation(libs.timber)
+    implementation(libs.glide)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

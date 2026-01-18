@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -74,7 +75,6 @@ fun UserInfoRoute(onBack: () -> Unit, viewModel: SearchViewModel) {
 fun UserInfoScreen(
     user: User?,
     onBack: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
@@ -175,7 +175,7 @@ fun UserInfoScreen(
                             )
                         }
                         Text(
-                            text = "REPUTATION",
+                            text = stringResource(R.string.reputation),
                             fontSize = 14.sp,
                             color = Color.Gray,
                             fontWeight = FontWeight.Bold,
@@ -217,7 +217,7 @@ fun UserInfoScreen(
                             )
                         }
                         Text(
-                            text = "JOINED DATE",
+                            text = stringResource(R.string.joined_date),
                             fontSize = 14.sp,
                             color = Color.Gray,
                             fontWeight = FontWeight.Bold,

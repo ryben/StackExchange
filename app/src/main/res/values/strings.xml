@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">StackExchange</string>
+
+    <!-- Search Screen-->
+    <string name="search_results">SEARCH RESULTS</string>
+    <string name="results_show_here">RESULTS SHOW HERE</string>
+    <string name="no_matches">NO MATCHES</string>
+    <string name="error_occurred">An error occurred.\nPlease try again later.</string>
+    <string name="search_by_name">Search by name</string>
+    
+    <!--  User info Screen  -->
+    <string name="reputation">REPUTATION</string>
+    <string name="joined_date">JOINED DATE</string>
+
 </resources>

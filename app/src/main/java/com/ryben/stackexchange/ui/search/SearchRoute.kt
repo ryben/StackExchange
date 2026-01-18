@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -102,7 +103,7 @@ fun SearchScreen(
                     onSearchTextChanged,
                     onSearch,
                     modifier = Modifier.weight(1F),
-                    placeholder = "Search by name"
+                    placeholder = stringResource(R.string.search_by_name)
                 )
                 IconButton(onClick = { onSearch(uiState.searchText) }) {
                     Image(
@@ -113,7 +114,7 @@ fun SearchScreen(
             }
 
             Text(
-                text = "SEARCH RESULTS",
+                text = stringResource(R.string.search_results),
                 modifier = Modifier.padding(top = 20.dp),
                 fontSize = 14.sp,
                 color = Color.Gray,
@@ -141,7 +142,7 @@ fun SearchScreen(
                                 modifier = Modifier.size(40.dp)
                             )
                             Text(
-                                text = "RESULTS SHOW HERE",
+                                text = stringResource(R.string.results_show_here),
                                 color = Color.Gray,
                                 textAlign = TextAlign.Center,
                                 fontSize = 16.sp,
@@ -186,7 +187,7 @@ fun SearchScreen(
                                     modifier = Modifier.size(40.dp)
                                 )
                                 Text(
-                                    text = "NO MATCHES",
+                                    text = stringResource(R.string.no_matches),
                                     color = Color.Gray,
                                     textAlign = TextAlign.Center,
                                     fontSize = 16.sp,
@@ -207,7 +208,7 @@ fun SearchScreen(
                                 modifier = Modifier.size(40.dp)
                             )
                             Text(
-                                text = "An error occurred.\nPlease try again later.",
+                                text = stringResource(R.string.error_occurred),
                                 color = Color.Gray,
                                 textAlign = TextAlign.Center,
                                 fontSize = 16.sp,

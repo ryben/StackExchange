@@ -22,6 +22,10 @@ class SearchViewModel @Inject constructor() : ViewModel() {
         _uiState.update { it.copy(searchText = newSearch) }
     }
 
+    fun onSearch() {
+
+    }
+
     fun getSearchResultsStub(): List<String> {
         return listOf(
             "Michael Scott",

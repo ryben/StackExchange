@@ -58,7 +58,9 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
-
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter)
+    implementation(libs.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

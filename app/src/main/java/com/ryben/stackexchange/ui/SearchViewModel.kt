@@ -1,4 +1,4 @@
-package com.ryben.stackexchange.ui.search
+package com.ryben.stackexchange.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

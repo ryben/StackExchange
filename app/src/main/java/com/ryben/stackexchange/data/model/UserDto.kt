@@ -16,5 +16,5 @@ data class UserDto(
     val reputation: String?,
 
     @SerializedName("creation_date")
-    val dateCreated: String?,
+    val dateCreated: Long?,
 )

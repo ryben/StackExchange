@@ -1,11 +1,17 @@
 package com.ryben.stackexchange.ui.userinfo
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -16,12 +22,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ryben.stackexchange.R
 import com.ryben.stackexchange.domain.model.User
-import com.ryben.stackexchange.ui.search.SearchViewModel
+import com.ryben.stackexchange.ui.SearchViewModel
+import com.ryben.stackexchange.ui.theme.CustomColor
 
 
 @Preview
@@ -33,7 +46,7 @@ fun UserInfoRoutePreview() {
             name = "Rey Benedicto",
             location = "Cavite",
             reputation = "500",
-            dateCreated = "20260118"
+            dateCreated = "Jul 1, 2022"
         ),
         onBack = {}
     )
@@ -56,7 +69,12 @@ fun UserInfoScreen(
     modifier: Modifier = Modifier
 ) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
 
             IconButton(onClick = onBack) {
                 Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "")
@@ -69,21 +87,117 @@ fun UserInfoScreen(
             ) {
 
                 Image(
-                    painter = painterResource(id = com.ryben.stackexchange.R.drawable.default_user_icon),
+                    painter = painterResource(id = R.drawable.default_user_icon),
                     contentDescription = "",
                     modifier = Modifier.size(120.dp)
                 )
 
                 user?.let {
-                    Text(text = it.name)
-                    Text(text = it.location)
-                    Text(text = it.reputation)
-                    Text(text = "Badges")
-                    Text(text = it.dateCreated)
-                }
 
+                    // Name
+                    Text(
+                        text = it.name,
+                        textAlign = TextAlign.Center,
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                            .fillMaxWidth()
+                    )
+
+                    // Location
+                    Text(
+                        text = it.location,
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(32.dp))
+
+                    // Reputation
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .border(
+                                width = 1.dp,
+                                color = Color.Gray.copy(alpha = 0.18f),
+                                shape = RoundedCornerShape(24.dp)
+                            )
+                            .padding(vertical = 24.dp)
+
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.diamond),
+                                contentDescription = "",
+                                colorFilter = ColorFilter.tint(CustomColor.Orange),
+                                modifier = Modifier
+                                    .size(36.dp)
+                                    .padding(top = 4.dp)
+                            )
+                            Text(
+                                text = it.reputation,
+                                fontSize = 32.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(top = 4.dp)
+                            )
+                        }
+                        Text(
+                            text = "REPUTATION",
+                            fontSize = 14.sp,
+                            color = Color.Gray,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(top = 4.dp)
+                        )
+                    }
+
+                    // Reputation
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                            .fillMaxWidth()
+                            .border(
+                                width = 1.dp,
+                                color = Color.Gray.copy(alpha = 0.18f),
+                                shape = RoundedCornerShape(24.dp)
+                            )
+                            .padding(vertical = 24.dp)
+
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.calendar),
+                                contentDescription = "",
+                                colorFilter = ColorFilter.tint(Color.Gray),
+                                modifier = Modifier
+                                    .size(36.dp)
+                                    .padding(top = 4.dp)
+                            )
+                            Text(
+                                text = it.dateCreated,
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(top = 4.dp)
+                            )
+                        }
+                        Text(
+                            text = "JOINED DATE",
+                            fontSize = 14.sp,
+                            color = Color.Gray,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(top = 4.dp)
+                        )
+                    }
+                }
             }
         }
-
     }
 }

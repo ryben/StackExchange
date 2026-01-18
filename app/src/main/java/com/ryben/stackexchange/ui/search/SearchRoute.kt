@@ -30,6 +30,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ryben.stackexchange.R
 import com.ryben.stackexchange.domain.model.User
+import com.ryben.stackexchange.ui.SearchStatus
+import com.ryben.stackexchange.ui.SearchUiState
+import com.ryben.stackexchange.ui.SearchViewModel
 
 
 @Preview
@@ -38,9 +41,9 @@ fun SearchScreenPreview() {
     val uiState = SearchUiState(
         searchText = "",
         searchResults = listOf(
-            User(0, "Michael Scott", "Scranton", "5", ""),
-            User(1, "Jim Halpert", "Scranton", "10", ""),
-            User(2, "Dwight Schrute", "Scranton", "900", ""),
+            User(0, "Michael Scott", "Scranton", "5", "Jan 1, 2010"),
+            User(1, "Jim Halpert", "Scranton", "10", "Feb 2, 2011"),
+            User(2, "Dwight Schrute", "Scranton", "900", "Mar 2, 2012"),
         ),
         status = SearchStatus.SUCCESS
     )

@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ryben.stackexchange.R
+import com.ryben.stackexchange.ui.theme.CustomColor
 
 @Preview
 @Composable
@@ -96,7 +97,7 @@ fun SearchResultItem(
                 text = reputation,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFFFF6214)
+                color = CustomColor.Orange
             )
             Text(
                 text = "REP",

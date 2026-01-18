@@ -5,5 +5,5 @@ data class User(
     val name: String,
     val location: String,
     val reputation: String,
-    val dateCreated: String,
+    val dateCreated: String, // String for simplicity, but if to be used for logic later, it should be of type Instant
 )

@@ -1,6 +1,6 @@
 # 🔍 StackOverflow User Search (via StackExchange API)
 
-A native Android application that provides an interface for searching and viewing Stack Overflow user profiles.
+A native Android application that provides an interface for searching and viewing Stack Overflow user profiles using the StackExchange API
 
 ---
 
@@ -14,7 +14,9 @@ A native Android application that provides an interface for searching and viewin
 ### 🎬 Interaction Demo
 Watch the app in action:
 
-[**Click here to view the Demo Recording**](https://github.com/user-attachments/assets/d2dc0268-b1e9-47ab-af47-689fde603b29)
+[**Click here to view the Demo Recording**](https://github.com/user-attachments/assets/41b2a810-89d3-4491-8c5b-2eb34f1eaa3c)
+
+
 
 ---
 
@@ -27,11 +29,12 @@ You can test the application immediately on your Android device by downloading t
 
 ---
 
-## 📋 Key Features
+## 📋 Features
 
-- **Global User Search:** Query any user across the Stack Overflow database.
+- **User Search:** Query any user across the Stack Overflow database.
 - **Optimized Results:** The app returns up to **20 search results** each time for a fast and focused browsing experience.
-- **Comprehensive Profiles:** View location, reputation, and account creation dates.
+- **Smart Sorting:** Results are sorted alphabetically. To ensure accuracy, the app trims leading spaces from display names returned by the API before performing the final sort.
+- **View Profiles:** View display name, location, reputation, and account creation dates.
 
 ---
 

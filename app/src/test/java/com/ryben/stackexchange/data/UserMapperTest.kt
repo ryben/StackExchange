@@ -17,7 +17,7 @@ class UserMapperTest {
             name = "Rey Benedicto",
             location = "Cavite",
             reputation = "20",
-            dateCreated = "20250118"
+            dateCreated = "20260118"
         )
 
         val expectedUser = User(
@@ -25,7 +25,7 @@ class UserMapperTest {
             name = "Rey Benedicto",
             location = "Cavite",
             reputation = "20",
-            dateCreated = "20250118"
+            dateCreated = "20260118"
         )
 
         // Then

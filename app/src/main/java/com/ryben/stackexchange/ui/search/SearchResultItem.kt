@@ -2,6 +2,7 @@ package com.ryben.stackexchange.ui.search
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -27,7 +29,8 @@ fun SearchResultItemPreview() {
         "Rey Benedicto",
         "Cavite",
         "100",
-        imageResourceId = R.drawable.default_user_icon
+        imageResourceId = R.drawable.default_user_icon,
+        onClick = {},
     )
 }
 
@@ -37,13 +40,22 @@ fun SearchResultItem(
     location: String,
     reputation: String,
     imageResourceId: Int = R.drawable.default_user_icon,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val roundedCornerVal = 24.dp
+
     Row(
         modifier = Modifier
-            .border(width = 0.5.dp, color = Color.LightGray, shape = RoundedCornerShape(24.dp))
+            .clip(RoundedCornerShape(roundedCornerVal))
+            .clickable { onClick() }
+            .border(
+                width = 0.5.dp,
+                color = Color.LightGray.copy(alpha = 0.5f),
+                shape = RoundedCornerShape(roundedCornerVal)
+            )
             .padding(horizontal = 32.dp, vertical = 24.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
 
     ) {
@@ -53,7 +65,14 @@ fun SearchResultItem(
             modifier = Modifier.size(50.dp)
         )
 
-        Column(modifier = modifier.weight(1F), Arrangement.spacedBy(4.dp)) {
+        Column(
+            modifier = modifier
+                .weight(1F)
+                .align(Alignment.CenterVertically),
+            verticalArrangement = Arrangement.spacedBy(
+                space = 4.dp
+            ),
+        ) {
             Text(
                 text = name.trim(),
                 fontSize = 20.sp,
@@ -61,7 +80,13 @@ fun SearchResultItem(
                 color = Color.DarkGray
             )
             if (location.trim().isNotBlank()) {
-                Text(text = location, color = Color.DarkGray)
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+
+                    Text(text = location, color = Color.DarkGray)
+                }
             }
         }
 

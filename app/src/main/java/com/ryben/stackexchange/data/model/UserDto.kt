@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class UserDto(
     @SerializedName("user_id")
-    val id: String,
+    val id: Long,
 
     @SerializedName("display_name")
     val name: String,

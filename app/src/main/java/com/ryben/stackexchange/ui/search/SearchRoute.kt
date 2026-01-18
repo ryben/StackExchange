@@ -39,9 +39,9 @@ fun SearchScreenPreview() {
     val uiState = SearchUiState(
         searchText = "",
         searchResults = listOf(
-            User("0", "Michael Scott", "Scranton", "5", ""),
-            User("1", "Jim Halpert", "Scranton", "10", ""),
-            User("2", "Dwight Schrute", "Scranton", "900", ""),
+            User(0, "Michael Scott", "Scranton", "5", ""),
+            User(1, "Jim Halpert", "Scranton", "10", ""),
+            User(2, "Dwight Schrute", "Scranton", "900", ""),
         ),
         status = SearchStatus.SUCCESS
     )
@@ -50,18 +50,20 @@ fun SearchScreenPreview() {
         uiState = uiState,
         onSearchTextChanged = {},
         onSearch = {},
+        onSelectUser = {},
     )
 }
 
 
 @Composable
-fun SearchRoute(viewModel: SearchViewModel = hiltViewModel()) {
+fun SearchRoute(navToUserInfoRoute: () -> Unit, viewModel: SearchViewModel = hiltViewModel()) {
     val uiState by viewModel.searchUiState.collectAsStateWithLifecycle()
 
     SearchScreen(
         uiState = uiState,
         onSearchTextChanged = viewModel::onSearchTextUpdated,
         onSearch = viewModel::onSearch,
+        onSelectUser = navToUserInfoRoute
     )
 }
 
@@ -71,6 +73,8 @@ fun SearchScreen(
     uiState: SearchUiState,
     onSearchTextChanged: (newSearchText: String) -> Unit,
     onSearch: (searchText: String) -> Unit,
+    onSelectUser: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
@@ -111,7 +115,7 @@ fun SearchScreen(
 
             Box(
                 modifier = Modifier
-                    .padding(top = 8.dp)
+                    .padding(top = 16.dp)
                     .fillMaxWidth()
                     .defaultMinSize(minHeight = 100.dp),
                 contentAlignment = Alignment.Center
@@ -119,7 +123,7 @@ fun SearchScreen(
                 when (uiState.status) {
 
                     SearchStatus.IDLE -> {
-                        Text(text = "ENTER A NAME TO START SEARCH", color = Color.Gray)
+                        Text(text = "RESULTS SHOW HERE", color = Color.Gray)
                     }
 
                     SearchStatus.LOADING -> {
@@ -135,13 +139,14 @@ fun SearchScreen(
                             // Search Results List
                             LazyColumn(
                                 modifier = Modifier.fillMaxWidth(),
-                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                                verticalArrangement = Arrangement.spacedBy(12.dp)
                             ) {
                                 items(items = uiState.searchResults, key = { it.id }) { item ->
                                     SearchResultItem(
                                         name = item.name,
                                         location = item.location,
-                                        reputation = item.reputation
+                                        reputation = item.reputation,
+                                        onClick = onSelectUser
                                     )
                                 }
                             }

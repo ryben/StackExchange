@@ -26,7 +26,7 @@ class UserRepositoryImpl @Inject constructor(
                 )
 
                 Timber.d("Search success: name:%s count=%s", name, dto.items.count())
-                Result.success(dto.items.map { it.toDomain() })
+                Result.success(dto.items.map { it.toDomain() }.sortedBy { it.name.lowercase() })
             } catch (e: CancellationException) {
                 throw e // Let the parent scope handle it the cancellation i.e.
             } catch (e: Exception) {
